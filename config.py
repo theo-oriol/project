@@ -1,7 +1,7 @@
 parameters = {
-    "path_source_img":"/home/lionel/theo/post_doc/whole_bird",
-    "path_source_split":"/home/lionel/theo/post_doc/project/saved_split_limit:1000.pkl",
-    "path_source_csv":"/home/lionel/theo/post_doc/final_table2.csv",
+    "path_source_img":"/home/oriol@newcefe.newage.fr/Datasets//whole_bird",
+    "path_source_split":"/home/oriol@newcefe.newage.fr/Models/project/saved_split_limit:1000.pkl",
+    "path_source_csv":"/home/oriol@newcefe.newage.fr/Datasets/final_table2.csv",
     "name":"Dino_binary_sampling_1000",
     "env_selected" : 13,
     "img_size":224,

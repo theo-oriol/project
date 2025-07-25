@@ -94,7 +94,6 @@ def pression_recall(all_valid_real_prob,all_valid_labels,habitat,destination_dir
     metric = BinaryPrecisionRecallCurve()
     metric.update(torch.from_numpy(all_valid_real_prob), torch.from_numpy(all_valid_labels))
     precision_list, recall_list, _ = metric.compute()
-    print(np.shape(precision_list),np.shape(recall_list))
 
     precision = np.array(precision_list)
     recall = np.array(recall_list)
