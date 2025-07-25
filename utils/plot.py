@@ -160,19 +160,9 @@ def families_plot(all_valid_real_prob,all_valid_labels,all_valid_family,habitat,
         img_per_env_per_family.append(np.sum(all_valid_labels[mask], axis=0))
 
 
-    ap_per_env_per_family = np.array(ap_per_env_per_family)  # shape: [n_families, n_envs]
-    mAP_per_family = np.mean(ap_per_env_per_family, axis=1)
+    ap_per_env_per_family = np.array(ap_per_env_per_family)  
     img_per_env_per_family = np.array(img_per_env_per_family)
 
-    plt.figure()
-    plt.hist(mAP_per_family, bins=22, range=(0,1), alpha=0.8, color='steelblue')
-    plt.title(f"distribution of mAP per family")
-    plt.xlabel("mAP")
-    plt.ylabel("Count")
-    plt.grid(True)
-
-    plt.tight_layout()
-    plt.savefig(os.path.join(destination_dir,"mAP per family"))
 
     plt.figure()
     plt.plot(img_per_env_per_family, ap_per_env_per_family, 'bo', markersize=3)
@@ -183,3 +173,51 @@ def families_plot(all_valid_real_prob,all_valid_labels,all_valid_family,habitat,
     plt.title("Distribution of AP per Family", fontsize=16)
     plt.tight_layout(rect=[0, 0, 1, 0.95])  
     plt.savefig(os.path.join(destination_dir,"Distribution of AP per Family"))
+
+
+def species_plot(all_valid_real_prob,all_valid_labels,all_valid_spe,destination_dir):
+    ap_per_env_per_species = []
+    img_per_species = []
+    img_per_env_per_species = []
+
+    for i in np.unique(all_valid_spe):
+        mask = all_valid_spe == i
+
+        y_true = torch.from_numpy(all_valid_labels[mask])
+        y_pred = torch.from_numpy(all_valid_real_prob[mask])
+
+        metric = BinaryPrecisionRecallCurve()
+        metric.update(y_pred, y_true)
+        precision, recall, _ = metric.compute()
+
+        precision = np.array(precision)
+        recall = np.array(recall)
+
+        ap_per_env = []
+
+
+        rec = recall
+        prec = precision
+        sorted_idx = np.argsort(rec)
+        rec = rec[sorted_idx]
+        prec = prec[sorted_idx]
+        ap = np.trapz(prec, rec)
+        ap_per_env.append(ap)
+
+        ap_per_env_per_species.append(ap_per_env)
+        img_per_species.append(len(y_true))
+        img_per_env_per_species.append(np.sum(all_valid_labels[mask], axis=0))
+
+    ap_per_env_per_species = np.array(ap_per_env_per_species)  
+    img_per_env_per_species = np.array(img_per_env_per_species)
+
+
+    plt.figure()
+    plt.plot(img_per_env_per_species, ap_per_env_per_species, 'bo', markersize=3)
+    plt.xlabel("Count")
+    plt.ylabel("AP (per species)")
+    plt.grid(True)
+
+    plt.title("Distribution of AP per species", fontsize=16)
+    plt.tight_layout(rect=[0, 0, 1, 0.95])  
+    plt.savefig(os.path.join(destination_dir,"Distribution of AP per species"))

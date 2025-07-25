@@ -4,7 +4,7 @@ from torch.utils.data import DataLoader
 
 from utils.tsne import tsne
 from utils.utils import load_config, load_species_split, predictions_last_epochs,save_config,report,save_log
-from utils.plot import families_plot, plot_loss, pression_recall
+from utils.plot import families_plot, plot_loss, pression_recall, species_plot
 from data.utils import species_name_extraction, extract_labels, extract_labels_and_image, startup_dir
 from data.dataset import ImageDataset
 from data.health import check
@@ -55,7 +55,7 @@ torch.save(trained_model.state_dict(),os.path.join(destination_dir,"model"))
 train_dataset = ImageDataset(parameters,list_of_train_image_path, list_of_train_image_labels, list_of_train_image_info, batch_size=parameters["train_batch_size"], valid=True)
 train_loader = DataLoader(train_dataset, batch_size=None, shuffle=False)
 
-(all_train_preds,all_train_labels,all_train_features,all_train_real_prob,all_train_sexe,all_train_family), (all_valid_preds,all_valid_labels,all_valid_features,all_valid_real_prob,all_valid_sexe,all_valid_family) = predictions_last_epochs(parameters,model,(train_loader,valid_loader))
+(all_train_preds,all_train_labels,all_train_features,all_train_real_prob,all_train_species,all_train_sexe,all_train_family), (all_valid_preds,all_valid_labels,all_valid_features,all_valid_real_prob,all_valid_species,all_valid_sexe,all_valid_family) = predictions_last_epochs(parameters,model,(train_loader,valid_loader))
 
 
 report(all_valid_labels, all_valid_preds,destination_dir)
@@ -64,5 +64,6 @@ plot_loss(parameters,metrics,destination_dir)
 
 pression_recall(all_valid_real_prob,all_valid_labels,habitats[parameters["env_selected"]],destination_dir)
 families_plot(all_valid_real_prob,all_valid_labels,all_valid_family,habitats[parameters["env_selected"]],families,destination_dir)
+species_plot(all_valid_real_prob,all_valid_labels,all_valid_species,destination_dir)
 
 tsne(all_valid_features,all_valid_labels,destination_dir)

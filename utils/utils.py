@@ -13,9 +13,10 @@ def predictions_last_epochs(parameters,model,dataloader):
     all_train_labels = []
     all_train_features = []
     all_train_real_prob = []
+    all_train_species = []
     all_train_sexe = []
     all_train_family = []
-
+    
     with torch.no_grad():
             for i, (inputs, labels, _,info) in enumerate(train_loader):
                 inputs = inputs.squeeze().to(parameters["device"])
@@ -34,6 +35,7 @@ def predictions_last_epochs(parameters,model,dataloader):
                 all_train_labels.extend(labels)
                 all_train_features.extend(features.cpu().numpy())
                 all_train_real_prob.extend(outputs.cpu().numpy())
+                all_train_species.extend(info[:,0])
                 all_train_sexe.extend(info[:,1])
                 all_train_family.extend(info[:,2].cpu().numpy())
 
@@ -41,6 +43,7 @@ def predictions_last_epochs(parameters,model,dataloader):
     all_train_labels = np.array(all_train_labels)
     all_train_features = np.array(all_train_features)
     all_train_real_prob = np.array(all_train_real_prob)
+    all_train_species = np.array(all_train_species)
     all_train_sexe = np.array(all_train_sexe)
     all_train_family = np.array(all_train_family)
 
@@ -48,6 +51,7 @@ def predictions_last_epochs(parameters,model,dataloader):
     all_valid_labels = []
     all_valid_features = []
     all_valid_real_prob = []
+    all_valid_species = []
     all_valid_sexe = []
     all_valid_family = []
 
@@ -68,6 +72,7 @@ def predictions_last_epochs(parameters,model,dataloader):
                 all_valid_labels.extend(labels)
                 all_valid_features.extend(features.cpu().numpy())
                 all_valid_real_prob.extend(outputs.cpu().numpy())
+                all_valid_species.extend(info[:,0])
                 all_valid_sexe.extend(info[:,1])
                 all_valid_family.extend(info[:,2].cpu().numpy())
                 
@@ -75,10 +80,11 @@ def predictions_last_epochs(parameters,model,dataloader):
     all_valid_labels = np.array(all_valid_labels)
     all_valid_features = np.array(all_valid_features)
     all_valid_real_prob = np.array(all_valid_real_prob)
+    all_valid_species = np.array(all_valid_species)
     all_valid_sexe = np.array(all_valid_sexe)
     all_valid_family = np.array(all_valid_family)
 
-    return (all_train_preds,all_train_labels,all_train_features,all_train_real_prob,all_train_sexe,all_train_family), (all_valid_preds,all_valid_labels,all_valid_features,all_valid_real_prob,all_valid_sexe,all_valid_family)
+    return (all_train_preds,all_train_labels,all_train_features,all_train_real_prob,all_train_species,all_train_sexe,all_train_family), (all_valid_preds,all_valid_labels,all_valid_features,all_valid_real_prob,all_valid_species,all_valid_sexe,all_valid_family)
 
 
 def report(all_valid_labels, all_valid_preds,destination_dir):

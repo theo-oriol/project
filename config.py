@@ -12,7 +12,7 @@ parameters = {
     "optimizer" : "Adam",
     "lr": 1e-7,
     "weight_decay":1e-4,
-    "epochs": 5,
+    "epochs": 2,
     "device":"cuda",
     "opt":"adam",
     "warmup_epochs":1,
