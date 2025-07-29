@@ -21,7 +21,7 @@ class ImageDataset(Dataset):
 
 
         annotations = np.array(annotations)
-        self.labels = np.array([1 if self.parameters["env_selected"] in np.where(label_vec == 1)[0] else 0 for label_vec in annotations])
+        self.labels = np.array([1 if self.parameters["habitat"] in np.where(label_vec == 1)[0] else 0 for label_vec in annotations])
         self.class0_indices = np.where(self.labels == 0)[0].tolist()
         self.class1_indices = np.where(self.labels == 1)[0].tolist()
 

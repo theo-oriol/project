@@ -9,8 +9,8 @@ def startup_dir(parameters):
     """
     print("Creating destination Directory")
     i=0
-    while os.path.isdir(os.path.join("results",f"{parameters['name']}_{parameters['env_selected']}_{i}")) : i+=1
-    destination_dir = os.path.join("results",f"{parameters['name']}_{parameters['env_selected']}_{i}")
+    while os.path.isdir(os.path.join("results",f"{parameters['name']}_{parameters['habitat']}_{i}")) : i+=1
+    destination_dir = os.path.join("results",f"{parameters['name']}_{parameters['habitat']}_{i}")
     os.makedirs(destination_dir)
     return destination_dir
 

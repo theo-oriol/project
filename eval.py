@@ -60,4 +60,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    eval(name=args.name, repeat=args.repeat)
+    eval(vars(args))
