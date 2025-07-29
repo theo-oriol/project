@@ -20,10 +20,10 @@ def species_name_extraction(parameters) :
     Extract the name of the species from the path of the images and return the list of unique name and info about each image (path, sexe and species)
     """
 
-    if not parameters["image_limitation"]:
+    if not parameters["img_limitation"]:
         list_of_images_path  = [ file  for file in os.listdir(parameters["path_source_img"]) if "png" in file]
     else : 
-        list_of_images_path  = [ file  for file in os.listdir(parameters["path_source_img"]) if "png" in file][:parameters["image_limitation"]]
+        list_of_images_path  = [ file  for file in os.listdir(parameters["path_source_img"]) if "png" in file][:parameters["img_limitation"]]
     all_species_info = {} # toutes les espèces
     for image_url in list_of_images_path:
         path_split = image_url.split("_")

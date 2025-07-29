@@ -16,5 +16,5 @@ parameters = {
     "device":"cuda",
     "opt":"adam",
     "warmup_epochs":20,
-    "image_limitation" : None,
+    "img_limitation" : None,
 }
