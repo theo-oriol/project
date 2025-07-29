@@ -27,7 +27,7 @@ train_species,valid_species = load_species_split(parameters)
 labels_in_csv, families, env_names, habitats = extract_labels(parameters,unique_species_name_list)
 (list_of_train_image_labels, list_of_train_image_path, list_of_train_image_info), (list_of_valid_image_labels, list_of_valid_image_path, list_of_valid_image_info), list_of_family_id, list_of_species_id = extract_labels_and_image(all_species_info, labels_in_csv, families, (train_species,valid_species))
 
-check((list_of_train_image_labels, list_of_train_image_info),(list_of_valid_image_labels, list_of_valid_image_info),parameters["env_selected"], habitats[parameters["env_selected"]],destination_dir)
+check((list_of_train_image_labels, list_of_train_image_info),(list_of_valid_image_labels, list_of_valid_image_info),parameters["habitat"], habitats[parameters["habitat"]],destination_dir)
 
 
 train_dataset = ImageDataset(parameters,list_of_train_image_path, list_of_train_image_labels, list_of_train_image_info, batch_size=parameters["train_batch_size"])
@@ -52,7 +52,7 @@ save_log(complete_log,destination_dir)
 torch.save(trained_model.state_dict(),os.path.join(destination_dir,"model"))  
 
 
-train_dataset = ImageDataset(parameters,list_of_train_image_path, list_of_train_image_labels, list_of_train_image_info, batch_size=parameters["train_batch_size"], valid=True)
+train_dataset = ImageDataset(parameters,list_of_train_image_path, list_of_train_image_labels, list_of_train_image_info, batch_size=parameters["valid_batch_size"], valid=True)
 train_loader = DataLoader(train_dataset, batch_size=None, shuffle=False)
 
 (all_train_preds,all_train_labels,all_train_features,all_train_real_prob,all_train_species,all_train_sexe,all_train_family), (all_valid_preds,all_valid_labels,all_valid_features,all_valid_real_prob,all_valid_species,all_valid_sexe,all_valid_family) = predictions_last_epochs(parameters,model,(train_loader,valid_loader))
