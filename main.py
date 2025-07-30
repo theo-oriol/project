@@ -62,8 +62,8 @@ report(all_valid_labels, all_valid_preds,destination_dir)
 
 plot_loss(parameters,metrics,destination_dir)
 
-pression_recall(all_valid_real_prob,all_valid_labels,habitats[parameters["env_selected"]],destination_dir)
-families_plot(all_valid_real_prob,all_valid_labels,all_valid_family,habitats[parameters["env_selected"]],families,destination_dir)
+pression_recall(all_valid_real_prob,all_valid_labels,habitats[parameters["habitat"]],destination_dir)
+families_plot(all_valid_real_prob,all_valid_labels,all_valid_family,habitats[parameters["habitat"]],families,destination_dir)
 species_plot(all_valid_real_prob,all_valid_labels,all_valid_species,destination_dir)
 auc_plot(all_valid_real_prob,all_valid_labels,destination_dir)
 tsne(all_valid_features,all_valid_labels,destination_dir)
