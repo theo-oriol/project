@@ -89,7 +89,7 @@ def parse_opt():
     parser.add_argument("--lr", "-lr", type=float, default=1e-6, help="learning rate")
     parser.add_argument("--weight_decay", "-wd", type=float, default=1e-4, help="weight decay")
     parser.add_argument("--warmup_epochs", "-we", type=int, default=5, help="number of warmup epochs")  
-    
+    return parser.parse_args()
                         
 if __name__ == "__main__":
     opt = parse_opt()
