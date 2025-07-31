@@ -113,9 +113,12 @@ def pression_recall(all_valid_real_prob,all_valid_labels,habitat,destination_dir
     colors = generate_n_colors(len(precision))
     random.shuffle(colors)
 
+    ap = np.trapz(precision, recall)
+
+
     plt.figure(figsize=(10,5))
 
-    plt.plot(recall,precision, label=f"{habitat} {np.mean(precision):.3f}")
+    plt.plot(recall,precision, label=f"{habitat} {ap:.3f}")
 
     plt.xlabel("recall")
     plt.ylabel("precision")
