@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 import os 
 
-os.environ["TORCH_HOME"] = "~/.cache/torch/hub/checkpoints/"
 os.environ["XFORMERS_AVAILABLE"] = "False"
 
 def load_dino():
