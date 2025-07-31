@@ -1,20 +1,20 @@
 import torch 
 
-def train(parameters,datasets,model,criterion,optimizer,scheduler,metrics):
+def train(epochs, device,datasets,model,criterion,optimizer,scheduler,metrics):
     print("Training")
     train_loader,valid_loader = datasets
     train_metrics = metrics()
     valid_metrics = metrics()
 
     complete_log = ""
-    for epochs in range(parameters["epochs"]):  
+    for e in range(epochs):  
         model.train()
 
         train_metrics.init_buffer()
 
         for inputs, labels, _, info in train_loader:
-            inputs = inputs.squeeze().to(parameters["device"])
-            labels = labels.squeeze().float().to(parameters["device"])
+            inputs = inputs.squeeze().to(device)
+            labels = labels.squeeze().float().to(device)
 
 
             if inputs.ndim == 3:
@@ -40,8 +40,8 @@ def train(parameters,datasets,model,criterion,optimizer,scheduler,metrics):
 
         with torch.no_grad():
             for inputs, labels, _, info in valid_loader:
-                inputs = inputs.squeeze().to(parameters["device"])
-                labels = labels.squeeze().float().to(parameters["device"])
+                inputs = inputs.squeeze().to(device)
+                labels = labels.squeeze().float().to(device)
 
                 if inputs.ndim == 3:
                     inputs = inputs.unsqueeze(0)
@@ -59,7 +59,7 @@ def train(parameters,datasets,model,criterion,optimizer,scheduler,metrics):
         
 
         log_str = (
-            f"{epochs:02d} | "
+            f"{e:02d} | "
             f"Train Loss: {train_metrics.metrics['loss'][-1]:.4f} | "
             f"Train Acc: {train_metrics.metrics['accuracy'][-1]:.2f} | "
             f"Train Macro: {train_metrics.metrics['macro_accuracy'][-1]:.2f} | "

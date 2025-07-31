@@ -45,7 +45,7 @@ def eval(parameters):
     tsne(all_valid_features,all_valid_labels,destination_dir)
     
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Simple greeter script")
+    parser = argparse.ArgumentParser()
 
     parser.add_argument("--name", "-n", type=str, required=True, help="Name of dir")
     parser.add_argument("--model","-m", type=str, choices=["dino", "None"], default="dino", help="model type")

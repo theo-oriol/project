@@ -5,7 +5,7 @@ import yaml
 import pickle
 from sklearn.metrics import classification_report
 
-def predictions_last_epochs(parameters,model,dataloader):
+def predictions_last_epochs(device,model,dataloader):
     train_loader,valid_loader = dataloader
     model.eval()
 
@@ -19,7 +19,7 @@ def predictions_last_epochs(parameters,model,dataloader):
     
     with torch.no_grad():
             for i, (inputs, labels, _,info) in enumerate(train_loader):
-                inputs = inputs.squeeze().to(parameters["device"])
+                inputs = inputs.squeeze().to(device)
 
                 
                 if inputs.ndim == 3:
@@ -58,7 +58,7 @@ def predictions_last_epochs(parameters,model,dataloader):
     with torch.no_grad():
             for inputs, labels, _, info in valid_loader:
 
-                inputs = inputs.squeeze().to(parameters["device"])
+                inputs = inputs.squeeze().to(device)
 
                 if inputs.ndim == 3:
                     inputs = inputs.unsqueeze(0)
@@ -104,12 +104,12 @@ def load_config():
     from config import parameters
     return parameters
 
-def load_species_split(parameters):
+def load_species_split(path_source_split):
     """
     Load the file containing the split (species in train/ species in val)
     return the split
     """
-    with open(parameters["path_source_split"], "rb") as f:
+    with open(path_source_split, "rb") as f:
         split = pickle.load(f)
 
     train_species = split["train_species"]

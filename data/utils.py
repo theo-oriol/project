@@ -2,28 +2,28 @@ import os
 import pandas as pd 
 import numpy as np 
 
-def startup_dir(parameters):
+def startup_dir(name,habitat):
     """
     Create the directory that wil contain the results of the training
     return path of the directory
     """
     print("Creating destination Directory")
     i=0
-    while os.path.isdir(os.path.join("results",f"{parameters['name']}_{parameters['habitat']}_{i}")) : i+=1
-    destination_dir = os.path.join("results",f"{parameters['name']}_{parameters['habitat']}_{i}")
+    while os.path.isdir(os.path.join("results",f"{name}_{habitat}_{i}")) : i+=1
+    destination_dir = os.path.join("results",f"{name}_{habitat}_{i}")
     os.makedirs(destination_dir)
     return destination_dir
 
 
-def species_name_extraction(parameters) :
+def species_name_extraction(img_limitation,path_source_img) :
     """
     Extract the name of the species from the path of the images and return the list of unique name and info about each image (path, sexe and species)
     """
 
-    if not parameters["img_limitation"]:
-        list_of_images_path  = [ file  for file in os.listdir(parameters["path_source_img"]) if "png" in file]
+    if not img_limitation:
+        list_of_images_path  = [ file  for file in os.listdir(path_source_img) if "png" in file]
     else : 
-        list_of_images_path  = [ file  for file in os.listdir(parameters["path_source_img"]) if "png" in file][:parameters["img_limitation"]]
+        list_of_images_path  = [ file  for file in os.listdir(path_source_img) if "png" in file][:img_limitation]
     all_species_info = {} # toutes les espèces
     for image_url in list_of_images_path:
         path_split = image_url.split("_")
@@ -39,12 +39,12 @@ def species_name_extraction(parameters) :
 
 
 
-def extract_labels(parameters,unique_species_name_list):
+def extract_labels(path_source_csv,unique_species_name_list):
     """
     Extract info about species from the csv file
     return the list of species and the list of labels
     """
-    df = pd.read_csv(parameters["path_source_csv"])
+    df = pd.read_csv(path_source_csv)
     df["sp_image"] = df["sp_image"]
     # species_list = [s.lower().strip() for s in unique_species_name_list]
     species_list = [s for s in unique_species_name_list]

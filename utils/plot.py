@@ -7,7 +7,7 @@ import torch
 from torcheval.metrics import BinaryPrecisionRecallCurve
 from sklearn.metrics import roc_curve, auc
 
-def plot_loss(parameters,metrics,destination_dir):
+def plot_loss(epochs,metrics,destination_dir):
     (train_metrics, valid_metrics) = metrics
 
 
@@ -32,13 +32,13 @@ def plot_loss(parameters,metrics,destination_dir):
         valid_acc_female.append(valid_metrics.metrics["sexe_macro_accuracy"][i][0])
         valid_acc_male.append(valid_metrics.metrics["sexe_macro_accuracy"][i][1])
 
-    epochs = [i for i in range(parameters["epochs"])]
+    e = [i for i in range(epochs)]
     
     plt.figure(figsize=(18, 10))
 
     plt.subplot(3, 2, 1)
-    plt.plot(epochs, train_metrics.metrics["loss"], label="Train Loss")
-    plt.plot(epochs, valid_metrics.metrics["loss"], label="Valid Loss")
+    plt.plot(e, train_metrics.metrics["loss"], label="Train Loss")
+    plt.plot(e, valid_metrics.metrics["loss"], label="Valid Loss")
     plt.xlabel("Epoch")
     plt.ylabel("Loss")
     plt.title("Loss over Epochs")
@@ -46,8 +46,8 @@ def plot_loss(parameters,metrics,destination_dir):
     plt.grid(True)
 
     plt.subplot(3, 2, 2)
-    plt.plot(epochs, train_metrics.metrics["accuracy"], label="Train Accuracy")
-    plt.plot(epochs, valid_metrics.metrics["accuracy"], label="Valid Accuracy")
+    plt.plot(e, train_metrics.metrics["accuracy"], label="Train Accuracy")
+    plt.plot(e, valid_metrics.metrics["accuracy"], label="Valid Accuracy")
     plt.xlabel("Epoch")
     plt.ylabel("Accuracy")
     plt.title("Accuracy over Epochs")
@@ -55,8 +55,8 @@ def plot_loss(parameters,metrics,destination_dir):
     plt.grid(True)
 
     plt.subplot(3, 2, 3)
-    plt.plot(epochs, train_metrics.metrics["macro_accuracy"], label="Train Macro Accuracy")
-    plt.plot(epochs, valid_metrics.metrics["macro_accuracy"], label="Valid Macro Accuracy")
+    plt.plot(e, train_metrics.metrics["macro_accuracy"], label="Train Macro Accuracy")
+    plt.plot(e, valid_metrics.metrics["macro_accuracy"], label="Valid Macro Accuracy")
     plt.xlabel("Epoch")
     plt.ylabel("Macro Accuracy")
     plt.title("Macro Accuracy over Epochs")
@@ -64,8 +64,8 @@ def plot_loss(parameters,metrics,destination_dir):
     plt.grid(True)
 
     plt.subplot(3, 2, 4)
-    plt.plot(epochs, train_macro_species_acc, label="Train Macro SPE Accuracy")
-    plt.plot(epochs, valid_macro_species_acc, label="Valid Macro SPE Accuracy")
+    plt.plot(e, train_macro_species_acc, label="Train Macro SPE Accuracy")
+    plt.plot(e, valid_macro_species_acc, label="Valid Macro SPE Accuracy")
     plt.xlabel("Epoch")
     plt.ylabel("Macro Species Accuracy")
     plt.title("Macro Species Accuracy over Epochs")
@@ -73,10 +73,10 @@ def plot_loss(parameters,metrics,destination_dir):
     plt.grid(True)
 
     plt.subplot(3, 2, 5)
-    plt.plot(epochs, train_acc_female, label="Train female Accuracy")
-    plt.plot(epochs, train_acc_male, label="Train male Accuracy")
-    plt.plot(epochs, valid_acc_female, label="Valid female Accuracy")
-    plt.plot(epochs, valid_acc_male, label="Valid male Accuracy")
+    plt.plot(e, train_acc_female, label="Train female Accuracy")
+    plt.plot(e, train_acc_male, label="Train male Accuracy")
+    plt.plot(e, valid_acc_female, label="Valid female Accuracy")
+    plt.plot(e, valid_acc_male, label="Valid male Accuracy")
     plt.xlabel("Epoch")
     plt.ylabel("Sexe Accuracy")
     plt.title("Sexe Accuracy over Epochs")
