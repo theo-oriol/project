@@ -3,7 +3,7 @@ import torch
 from torch.utils.data import DataLoader
 
 from utils.tsne import tsne
-from utils.utils import load_config, load_species_split, predictions_last_epochs,save_config,report,save_log
+from utils.utils import load_species_split, predictions_last_epochs,save_config,report,save_log
 from utils.plot import auc_plot, families_plot, plot_loss, pression_recall, species_plot
 from data.utils import species_name_extraction, extract_labels, extract_labels_and_image, startup_dir
 from data.dataset import ImageDataset
