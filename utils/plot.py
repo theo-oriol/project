@@ -113,6 +113,10 @@ def pression_recall(all_valid_real_prob,all_valid_labels,habitat,destination_dir
     colors = generate_n_colors(len(precision))
     random.shuffle(colors)
 
+    sorted_indices = np.argsort(recall)
+    recall = recall[sorted_indices]
+    precision = precision[sorted_indices]
+
     ap = np.trapz(precision, recall)
 
 
