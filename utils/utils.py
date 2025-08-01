@@ -100,9 +100,7 @@ def save_config(parameters,destination_dir):
     with open(os.path.join(destination_dir,"config.yaml"), 'w') as outfile:
         yaml.dump(parameters, outfile, default_flow_style=False)
 
-def load_config():
-    from config import parameters
-    return parameters
+
 
 def load_species_split(path_source_split):
     """
