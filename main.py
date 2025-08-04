@@ -8,7 +8,7 @@ from utils.plot import auc_plot, families_plot, plot_loss, pression_recall, spec
 from data.utils import species_name_extraction, extract_labels, extract_labels_and_image, startup_dir
 from data.dataset import ImageDataset
 from data.health import check
-from model.dino_model import Classifier
+from model.model_import import classifier
 from train.losses import get_loss_function
 from train.scheduler import get_optimizer, get_scheduler
 from train.trainer import train
@@ -35,7 +35,7 @@ def main(opt):
     valid_dataset = ImageDataset((opt.habitat,opt.img_size,opt.path_source_img,opt.device,opt.model),list_of_valid_image_path, list_of_valid_image_labels, list_of_valid_image_info, batch_size=opt.valid_batch_size, valid=True)
     valid_loader = DataLoader(valid_dataset, batch_size=None, shuffle=False)
 
-    model = Classifier()
+    model = classifier(opt.model)
 
     device = torch.device(opt.device)
 
@@ -73,7 +73,7 @@ def parse_opt():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--name", "-n", type=str, required=True, help="Name of dir")
-    parser.add_argument("--model","-m", type=str, choices=["dino", "None"], default="dino", help="model type")
+    parser.add_argument("--model","-m", type=str, choices=["dinov2_vitl14_reg", "dinov2_vitl14"], default="dinov2_vitl14_reg", help="model type")
     parser.add_argument("--loss", "-l", type=str, default="bcewithlogitsloss", help="Name of dir")
     parser.add_argument("--train_batch_size", "-tbs", type=int, default=40, help="train batch size")
     parser.add_argument("--valid_batch_size", "-vbs", type=int, default=40, help="batch size")
