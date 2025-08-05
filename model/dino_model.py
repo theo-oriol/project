@@ -31,7 +31,7 @@ class dinov2_vitl14_reg(nn.Module):
 class dinov2_vitl14(nn.Module):
     def __init__(self,output_dim=1):
         super().__init__()
-        dino = torch.hub.load('facebookresearch/dinov2', 'dinov2_vitl14_reg')
+        dino = torch.hub.load('facebookresearch/dinov2', 'dinov2_vitl14')
         self.backbone = dino
 
         for param in self.backbone.parameters():

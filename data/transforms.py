@@ -72,5 +72,12 @@ class ApplyTransform:
                         std=([0.5]*3),
                 ),
             ])
+        elif model == 'inceptionv4':
+            self.normalise = transforms.Compose([
+                transforms.Normalize(
+                        mean=(0.5, 0.5, 0.5),
+                        std=(0.5, 0.5, 0.5),
+                ),
+            ])
         else : raise ValueError(f"Unknown model : {model}")
 

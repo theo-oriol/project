@@ -22,7 +22,7 @@ class Classifier(nn.Module):
             img_size=526,
             init_values=1.0,
             block_chunks=0,
-            num_register_tokens=4,
+            # num_register_tokens=4,
         )
         # dino = dinov2_vits14_reg_lc()
 
@@ -100,7 +100,7 @@ for img_path in tqdm(image_paths, desc="Processing images"):
         attn = attn.reshape(nh, w_featmap, h_featmap)  # [heads, 16, 16]
 
         # Upsample to [heads, 224, 224]
-        attn_upsampled = F.interpolate(attn.unsqueeze(0), scale_factor=patch_size, mode="nearest")[0].cpu().numpy()
+        attn_upsampled = F.interpolate(attn.unsqueeze(0), scale_factor=patch_size, mode="nearest")[0].detach().cpu().numpy()
 
         # Per-image mean over heads: [224, 224]
         per_image_mean = np.mean(attn_upsampled, axis=0)

@@ -73,7 +73,7 @@ def parse_opt():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--name", "-n", type=str, required=True, help="Name of dir")
-    parser.add_argument("--model","-m", type=str, choices=["dinov2_vitl14_reg", "dinov2_vitl14"], default="dinov2_vitl14_reg", help="model type")
+    parser.add_argument("--model","-m", type=str, choices=["dinov2_vitl14_reg", "dinov2_vitl14", "inceptionv4"], default="dinov2_vitl14_reg", help="model type")
     parser.add_argument("--loss", "-l", type=str, default="bcewithlogitsloss", help="Name of dir")
     parser.add_argument("--train_batch_size", "-tbs", type=int, default=40, help="train batch size")
     parser.add_argument("--valid_batch_size", "-vbs", type=int, default=40, help="batch size")
