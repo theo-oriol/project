@@ -3,3 +3,5 @@ results/*
 !results/.gitkeep 
 __pycache__/
 *.ipynb
+attention_outputs/
+pca_output/

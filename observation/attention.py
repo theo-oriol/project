@@ -48,7 +48,7 @@ output_dir = "./attention_outputs"
 os.makedirs(output_dir, exist_ok=True)
 
 model = Classifier()
-checkpoint = torch.load("/home/oriol@newcefe.newage.fr/JeanZay/results_whole/results/dino_10_000_5_0/model", map_location="cpu")
+checkpoint = torch.load("/home/oriol@newcefe.newage.fr/Models/project/results/att_4_2/model", map_location="cpu")
 model.load_state_dict(checkpoint)
 model = model.backbone
 model.eval().to(device)
