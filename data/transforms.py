@@ -37,23 +37,19 @@ class ApplyTransform:
         ])
 
         self.augment = transforms.Compose([       
-            transforms.RandomApply([ transforms.RandomResizedCrop(img_size, scale=(0.6, 1.2), ratio=(0.75, 1.33))],p=0.1),
-            transforms.RandomApply([ transforms.RandomHorizontalFlip()],p=0.1),
-            transforms.RandomApply([ transforms.RandomVerticalFlip()],p=0.1),
+            transforms.RandomApply([ transforms.RandomHorizontalFlip()],p=0.2),
             transforms.RandomApply([ transforms.RandomRotation(degrees=5)],p=0.1),
             transforms.RandomApply([
                 transforms.ColorJitter(
-                    brightness=0.4,
-                    contrast=0.4,
-                    saturation=0.4,
-                    hue=0.1
+                    brightness=0.1,
+                    contrast=0.1,
+                    saturation=0.1,
+                    hue=0.05
                 ),
             ], p=0.1),
-            transforms.RandomApply([ transforms.GaussianBlur(kernel_size=5, sigma=(0.1, 2.0))],p=0.1),
-            transforms.RandomAdjustSharpness(sharpness_factor=2.0, p=0.1),
-            transforms.RandomApply([
-                transforms.RandomPosterize(bits=4)
-            ], p=0.1),         
+            transforms.RandomAdjustSharpness(sharpness_factor=1.5, p=0.1),
+            transforms.RandomErasing(p=0.05),
+       
             transforms.ToTensor(),
         ])
             
