@@ -47,9 +47,9 @@ class ApplyTransform:
                 ),
             ], p=0.1),
             transforms.RandomAdjustSharpness(sharpness_factor=1.5, p=0.1),
-            transforms.RandomErasing(p=0.05),
        
             transforms.ToTensor(),
+            transforms.RandomErasing(p=0.05)
         ])
             
         if model in ['dinov2_vitl14_reg', 'dinov2_vitl14']: 
