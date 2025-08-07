@@ -37,7 +37,6 @@ class ApplyTransform:
         ])
 
         self.augment = transforms.Compose([       
-            transforms.RandomApply([ transforms.RandomHorizontalFlip()],p=0.2),
             transforms.RandomApply([ transforms.RandomRotation(degrees=5)],p=0.1),
             transforms.RandomApply([
                 transforms.ColorJitter(
