@@ -10,6 +10,9 @@ def classifier(m):
     elif m == "inceptionv4":
         from model.inception import inceptionv4 as Classifier
         return Classifier()
+    elif m == "eva02L":
+        from model.eva import eva02L as Classifier
+        return Classifier()
     else : raise ValueError(f"Unknown model type: {m}")
     
  
